@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+{% block titulo %}Detalle de Programa{% endblock %}
+{% block contenido %}
+  <h1>Programa: {{ programa.nombre }}</h1>
+  <p><strong>Tipos de Asistencia</strong></p>
+  <ul>
+    {% for asistencia in programa.tipo_asistencias.all %}
+      <li>{{ asistencia }}</li>
+    {% endfor %}
+  </ul>
+  <p><strong>Fecha de Inicio: </strong>{{ programa.fecha_inicio|date:"SHORT_DATE_FORMAT" }}</p>
+  <p><strong>Fecha de Fin:</strong> {{ programa.fecha_fin|default_if_none:"---" }}</p>
+
+  <form action="{% url 'programa:programa_delete' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" value="{{ programa.id }}">
+    <button><a href="{% url 'programa:programa_edit' programa.id %}">Editar</a></button>
+    <input type="submit" value="Eliminar">
+  </form>
+{% endblock %}

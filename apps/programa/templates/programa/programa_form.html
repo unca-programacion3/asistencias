@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+{% block titulo %}Creación de Programa{% endblock %}
+{% block contenido %}
+    <h1>Creación de Programa</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% for field in form %}
+          <div class="campo">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+          </div><br>
+        {% endfor %}
+      {% csrf_token %}
+      <input type="submit" value="Guardar">
+    </form>
+{% endblock %}
