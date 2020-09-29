@@ -11,10 +11,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
-try:
-    from .configuraciones_locales import *
-except ImportError:
-    raise Exception("El archivo de configuraciones locales es requerido para ejecutar este proyecto")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -124,3 +120,8 @@ STATIC_URL = '/static/'
 # Media Files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+try:
+    from .configuraciones_locales import *
+except ImportError:
+    raise Exception("El archivo de configuraciones locales es requerido para ejecutar este proyecto")
