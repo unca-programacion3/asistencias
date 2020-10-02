@@ -36,9 +36,27 @@ def programa_create(request):
                   {'form': programa_form})
 
 
-def programa_delete(self):
-    pass
+def programa_delete(request):
+    if request.method == 'POST':
+        if 'id_programa' in request.POST:
+            programa = get_object_or_404(Programa, pk=request.POST['id_programa'])
+            nombre_programa = programa.nombre
+            programa.delete()
+            messages.success(request, 'Se ha eliminado exitosamente el Programa {}'.format(nombre_programa))
+        else:
+            messages.error(request, 'Debe indicar qué Programa se desea eliminar')
+    return redirect(reverse('programa:programa_lista'))
 
 
-def programa_edit(self, pk):
-    pass
+def programa_edit(request, pk):
+    programa = get_object_or_404(Programa, pk=pk)
+    if request.method == 'POST':
+        form_programa = ProgramaForm(request.POST, request.FILES, instance=programa)
+        if form_programa.is_valid():
+            form_programa.save()
+            messages.success(request, 'Se ha actualizado correctamente el Programa')
+            return redirect(reverse('programa:programa_detalle', args=[programa.id]))
+    else:
+        form_programa = ProgramaForm(instance=programa)
+
+    return render(request, 'programa/programa_edit.html', {'form': form_programa})

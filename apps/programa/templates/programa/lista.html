@@ -1,11 +1,12 @@
 {% extends "base/base.html" %}
 {% block titulo %}Lista de Programas{% endblock %}
 {% block contenido %}
-    <style>
-        table, th, tr, td {
-            border: 1px solid black;
-        }
-    </style>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}  <div class="message" role="status">{{ message }}</div>{% endif %}
+            {% if message.tags == 'error' %}  <div class="errors" role="alert">{{ message }}</div>{% endif %}
+        {% endfor %}
+    {% endif %}
   <h2>Lista de Programas</h2>
     <table>
         <tr>

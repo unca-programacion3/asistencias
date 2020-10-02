@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+{% block titulo %}Edición de Programa{% endblock %}
+{% block contenido %}
+    <h1>Edición de Programa</h1>
+    <form method="post" enctype="multipart/form-data">
+          <div class="campo">
+            {{ form.nombre.errors }}
+            <label for="{{ form.nombre.id_for_label}}">Nombre:</label>
+            {{ form.nombre }}
+          </div><br>
+          <div class="campo">
+            {{ form.tipo_asistencias.errors }}
+            <label for="{{ form.tipo_asistencias.id_for_label}}">Tipo de Asistencias:</label>
+            {{ form.tipo_asistencias }}
+          </div><br>
+          <div class="campo">
+            {{ form.requisitos.errors }}
+            <label for="{{ form.requisitos.id_for_label}}">Requisitos:</label>
+            {{form.requisitos}}
+          </div><br>
+          <div class="campo">
+            {{ form.fecha_inicio.errors }}
+            <label for="{{ form.fecha_inicio.id_for_label}}">Fecha de Inicio:</label>
+            {{ form.fecha_inicio }}
+          </div><br>
+          <div class="campo">
+            {{ form.fecha_fin.errors }}
+            <label for="{{ form.fecha_fin.id_for_label}}">Fecha Fin:</label>
+            {{ form.fecha_fin }}
+          </div><br>
+        {% csrf_token %}
+        <input type="submit" value="Actualizar">
+    </form>
+{% endblock %}

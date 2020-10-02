@@ -5,5 +5,5 @@ db.sqlite3
 .idea/
 media/
 venv/
-
+configuraciones_locales.py
 

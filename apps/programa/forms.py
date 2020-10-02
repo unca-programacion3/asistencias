@@ -12,9 +12,17 @@ class ProgramaForm(forms.ModelForm):
 
         widgets = {
             'requisitos': forms.ClearableFileInput(),
-            'fecha_inicio': DateInput(attrs={'type': 'date'}),
-            'fecha_fin': DateInput(attrs={'type': 'date'})
+            'fecha_inicio': DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
+            'fecha_fin': DateInput(format='%y-%m-%d', attrs={'type': 'date'})
         }
+
+    def clean_requisitos(self):
+        requisitos = self.cleaned_data['requisitos']
+        if requisitos:
+            extension = requisitos.name.rsplit('.', 1)[1].lower()
+            if extension != 'pdf':
+                raise ValidationError('El archivo seleccionado no tiene el formato PDF.')
+        return requisitos
 
     def clean(self):
         cleaned_data = super().clean()
@@ -28,11 +36,4 @@ class ProgramaForm(forms.ModelForm):
             )
         return cleaned_data
 
-    def clean_requisitos(self):
-        requisitos = self.cleaned_data['requisitos']
-        if requisitos:
-            extension = requisitos.name.rsplit('.', 1)[1].lower()
-            if extension != 'pdf':
-                raise ValidationError('El archivo seleccionado no tiene el formato PDF.')
-        return requisitos
 

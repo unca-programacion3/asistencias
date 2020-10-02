@@ -2,6 +2,11 @@
 {% block titulo %}Detalle de Programa{% endblock %}
 {% block contenido %}
   <h1>Programa: {{ programa.nombre }}</h1>
+  {% if messages %}
+      {% for message in messages %}
+          {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
+      {% endfor %}
+  {% endif %}
   <p><strong>Tipos de Asistencia</strong></p>
   <ul>
     {% for asistencia in programa.tipo_asistencias.all %}
@@ -10,11 +15,17 @@
   </ul>
   <p><strong>Fecha de Inicio: </strong>{{ programa.fecha_inicio|date:"SHORT_DATE_FORMAT" }}</p>
   <p><strong>Fecha de Fin:</strong> {{ programa.fecha_fin|default_if_none:"---" }}</p>
-
+  <p><strong>Requisitos:</strong>
+    {% if programa.requisitos %}
+        {{ programa.requisitos }}
+    {% else %}
+      No posee
+    {% endif %}
+  </p>
   <form action="{% url 'programa:programa_delete' %}" method="POST">
     {% csrf_token %}
-    <input type="hidden" value="{{ programa.id }}">
+    <input type="hidden" name="id_programa" value="{{ programa.id }}">
     <button><a href="{% url 'programa:programa_edit' programa.id %}">Editar</a></button>
-    <input type="submit" value="Eliminar">
+    <input type="submit" value="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el registro?');">
   </form>
 {% endblock %}
