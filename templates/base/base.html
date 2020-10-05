@@ -13,6 +13,23 @@
                     alt="Logo que muestra figuras de personas entrelazadas" width="780" height="200" > </a>
                 <h1>Sistema de Gestión de Asistencias Sociales</h1>
             </header>
+            <ul class="menu">
+              <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><a href="/">Home</a></li>
+              <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Programas</a>
+                <div class="dropdown-content">
+                  <a href="{% url 'programa:programa_lista' %}">Listar</a>
+                  <a href="{% url 'programa:programa_create' %}">Crear</a>
+                </div>
+              </li>
+              <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Personas</a>
+                <div class="dropdown-content">
+                  <a href="#">Listar</a>
+                  <a href="#">Crear</a>
+                </div>
+              </li>
+            </ul>
             <section>
                 {% block contenido %}
                 {% endblock %}
