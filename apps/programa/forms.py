@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import DateInput
 
-from .models import Programa
+from .models import Programa, AsignacionBeneficio
 
 
 class ProgramaForm(forms.ModelForm):
@@ -37,3 +37,7 @@ class ProgramaForm(forms.ModelForm):
         return cleaned_data
 
 
+class AsignacionBeneficioForm(forms.ModelForm):
+    class Meta:
+        model = AsignacionBeneficio
+        fields = ('programa', 'persona', 'tipo_asistencia', 'fecha_entrega', 'fecha_fin')
