@@ -35,9 +35,3 @@ class ProgramaForm(forms.ModelForm):
                 code='invalido'
             )
         return cleaned_data
-
-
-class AsignacionBeneficioForm(forms.ModelForm):
-    class Meta:
-        model = AsignacionBeneficio
-        fields = ('programa', 'persona', 'tipo_asistencia', 'fecha_entrega', 'fecha_fin')
