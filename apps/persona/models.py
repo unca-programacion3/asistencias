@@ -22,7 +22,7 @@ class Persona(models.Model):
 
 
 class EstadoSalud(models.Model):
-    persona = models.OneToOneField(Persona, on_delete=models.CASCADE)
+    persona = models.OneToOneField(Persona, on_delete=models.CASCADE, related_name='estado_salud')
     es_discapacitado = models.BooleanField(null=True)
     posee_obesidad = models.BooleanField(null=True)
     posee_desnutricion = models.BooleanField(null=True)
