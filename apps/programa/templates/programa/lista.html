@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Lista de Programas de Asistencias{% endblock %}
+
+{% block contenido %}
+    <h2>Lista de Programas de Asistencias</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo Asistencias</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Fecha Creacion</th>
+        </tr>
+        {% for programa in programas %}
+            <tr>
+                <td>{{ programa.nombre }}</td>
+                <td>
+                    <ul>
+                        {% for tipo in programa.tipo_asistencias %}
+                            <li>{{ tipo.descripcion }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>{{ programa.fecha_inicio }}</td>
+                <td>{{ programa.fecha_fin }}</td>
+                <td>{{ programa.fecha_creacion }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
