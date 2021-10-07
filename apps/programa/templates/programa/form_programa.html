@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block titulo %}Creacion/Edicion de Programas de Asistencias{% endblock %}
+
+{% block contenido %}
+    <h2>Creacion / Edicion de Programa de Asistencia</h2>
+
+    <form action="" method="POST">
+        <label>Nombre</label>
+        <input type="text" name="nombre" required>
+        <br>
+        <label>Nombre</label>
+        <select multiple name="tipo_asistencias" required>
+            {% for tipo in tipos_asistencias %}
+                <option value="{{tipo.id}}">{{ tipo}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Fecha de Inicio</label>
+        <input type="date" name="fecha_inicio" required>
+        <br>
+        <label>Fecha de Fin</label>
+        <input type="date" name="fecha_fin">
+        <br>
+        <input type="submit" value="Guardar">
+        <input type="reset" value="Cancelar">
+    </form>
+
+{% endblock %}

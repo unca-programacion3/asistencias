@@ -1,9 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
 
 {% block titulo %}Lista de Programas de Asistencias{% endblock %}
 
 {% block contenido %}
     <h2>Lista de Programas de Asistencias</h2>
+    {% if messages %}
+          {% for message in messages %}
+              {% if message.tags == 'success' %}  <div class="message" style="color:green;">{{ message }}</div>{% endif %}
+               {% if message.tags == 'error' %}  <div class="message" style="color:red;">{{ message }}</div>{% endif %}
+          {% endfor %}
+      {% endif %}
     <table>
         <tr>
             <th>Nombre</th>
@@ -17,13 +23,13 @@
                 <td>{{ programa.nombre }}</td>
                 <td>
                     <ul>
-                        {% for tipo in programa.tipo_asistencias %}
+                        {% for tipo in programa.tipo_asistencias.all %}
                             <li>{{ tipo.descripcion }}</li>
                         {% endfor %}
                     </ul>
                 </td>
-                <td>{{ programa.fecha_inicio }}</td>
-                <td>{{ programa.fecha_fin }}</td>
+                <td>{{ programa.fecha_inicio|date:"d/m/Y" }}</td>
+                <td>{{ programa.fecha_fin|default_if_none:"---" }}</td>
                 <td>{{ programa.fecha_creacion }}</td>
             </tr>
         {% endfor %}
