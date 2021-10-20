@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from django.db import models
+from django.utils.text import slugify
 
 from apps.core.models import ModeloBase
 from apps.persona.models import Persona
@@ -19,9 +20,14 @@ class Programa(ModeloBase):
     requisitos = models.FileField(upload_to="requisitos", blank=True)
     fecha_inicio = models.DateField(default=date.today)
     fecha_fin = models.DateField(null=True, blank=True)
+    slug = models.SlugField(max_length=100)
 
     def __str__(self):
         return self.nombre
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.nombre)
+        return super().save(*args, **kwargs)
 
 
 class AsignacionBeneficio(ModeloBase):

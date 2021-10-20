@@ -17,7 +17,7 @@
         </tr>
         {% for programa in programas %}
             <tr>
-              <td><a href="{% url 'programa:programa_detalle' programa.id %}">{{ programa.nombre }}</a></td>
+              <td><a href="{% url 'programa:programa_detalle' programa.slug %}">{{ programa.nombre }}</a></td>
               <td> <ul>
                   {% for asistencia in programa.tipo_asistencias.all %}
                     <li>{{ asistencia }}</li>

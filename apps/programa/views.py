@@ -12,8 +12,8 @@ def programa_lista(request):
                   {'programas': programas})
 
 
-def programa_detalle(request, pk):
-    programa = get_object_or_404(Programa, pk=pk)
+def programa_detalle(request, slug):
+    programa = get_object_or_404(Programa, slug=slug)
     return render(request,
                   'programa/detalle.html',
                   {'programa': programa})
