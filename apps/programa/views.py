@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
@@ -19,6 +20,7 @@ def programa_detalle(request, pk):
                   {'programa': programa})
 
 
+@permission_required('programa.add_programa', raise_exception=True)
 def programa_create(request):
     nuevo_programa = None
     if request.method == 'POST':
@@ -48,6 +50,7 @@ def programa_delete(request):
     return redirect(reverse('programa:programa_lista'))
 
 
+@login_required
 def programa_edit(request, pk):
     programa = get_object_or_404(Programa, pk=pk)
     if request.method == 'POST':
