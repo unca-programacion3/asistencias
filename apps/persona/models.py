@@ -22,6 +22,9 @@ class Persona(models.Model):
 
 
 class EstadoSalud(models.Model):
+    class Meta:
+        verbose_name_plural = 'Estados de Salud'
+
     persona = models.OneToOneField(Persona, on_delete=models.CASCADE)
     es_discapacitado = models.BooleanField(null=True)
     posee_obesidad = models.BooleanField(null=True)

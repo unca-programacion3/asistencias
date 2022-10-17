@@ -1,0 +1,10 @@
+{% extends "base/base.html" %}
+{% block titulo %}Inicio Sesión{% endblock %}
+{% block contenido %} 
+     <h1>Bienvenido, {{ request.user.first_name }}</h1>
+    <ul>
+        <li>Username: {{ request.user.username }}</li>
+        <li>Email: {{ request.user.email }}</li>
+    </ul>
+    <a href="{% url 'usuarios:logout' %}">Cerrar Sesión</a>
+{% endblock %} 

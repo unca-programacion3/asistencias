@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
@@ -23,6 +24,8 @@ def programa_detalle(request, pk):
                   {'programa': programa})
 
 
+@login_required(login_url='usuarios:login')
+@permission_required('programa.add_programa', raise_exception=True)
 def programa_create(request):
     nuevo_programa = None
     if request.method == 'POST':
