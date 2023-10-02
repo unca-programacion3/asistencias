@@ -8,6 +8,10 @@ from .models import Programa
 
 def programa_lista(request):
     programas = Programa.objects.all()
+
+    if 'consulta' in request.GET:
+        programas = programas.filter(nombre__icontains=request.GET['consulta'])
+
     return render(request, 'programa/lista.html',
                   {'programas': programas})
 
