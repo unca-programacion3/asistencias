@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+{% block titulo %}Lista de Personas{% endblock %}
+{% block contenido %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}  <div class="message" role="status">{{ message }}</div>{% endif %}
+            {% if message.tags == 'error' %}  <div class="errors" role="alert">{{ message }}</div>{% endif %}
+        {% endfor %}
+    {% endif %}
+  <h2>Lista de Personas</h2>
+    <table>
+        <tr>
+            <th>Nombre Completo</th>
+            <th>DNI</th>
+            <th>Sexo</th>
+            <th>Fecha Nacimiento</th>
+            <th>Es Discapacitado</th>
+            <th>Posee Obesidad</th>
+            <th>Posee Desnutricion</th>
+            <th>observaciones</th>
+        </tr>
+        {% for persona in personas %}
+            <tr>
+                <td><a href="{% url 'persona:persona_detalle' persona.id %}">{{ persona.nombre_completo }}</a></td>
+                <td>{{ persona.dni }}</td>
+                <td>{{ persona.get_sexo_display }}</td>
+                <td>{{ persona.fecha_nacimiento|date:"SHORT_DATE_FORMAT" }}</td>
+                <td>{{ persona.estadosalud.es_discapacitado }}</td>
+                <td>{{ persona.estadosalud.posee_obesidad }}</td>
+                <td>{{ persona.estadosalud.posee_desnutricion }}</td>
+                <td>{{ persona.estadosalud.observaciones }}</td>
+            </tr>
+        {% endfor %}
+   </table>
+{% endblock %}

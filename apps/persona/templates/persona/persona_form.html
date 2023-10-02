@@ -1,0 +1,61 @@
+{% extends "base/base.html" %}
+{% block titulo %}Creación de Persona{% endblock %}
+{% block contenido %}
+    <h1>Creación de Persona</h1>
+    <form method="post">
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <div class="campo">
+                <label for="{{ form_persona.dni.id_for_label }}">Número de DNI:</label>
+                {{form_persona.dni}}
+                {{form_persona.dni.errors}}
+            </div>
+            <div class="campo">
+                <label for="{{ form_persona.nombre_completo.id_for_label }}">Nombre Completo:</label>
+                {{form_persona.nombre_completo}}
+                {{form_persona.nombre_completo.errors}}
+            </div>
+            <div class="campo">
+                <label for="{{ form_persona.sexo.id_for_label }}">Sexo:</label>
+                {{form_persona.sexo}}
+                {{form_persona.sexo.errors}}
+            </div>
+            <div class="campo">
+                <label for="{{ form_persona.fecha_nacimiento.id_for_label }}" >Fecha de Nacimiento:</label>
+                {{form_persona.fecha_nacimiento}}
+                {{form_persona.fecha_nacimiento.errors}}
+            </div>
+            <div class="campo">
+                <label for="{{ form_persona.domicilio.id_for_label }}" >Domicilio:</label>
+                {{form_persona.domicilio}}
+                {{form_persona.domicilio.errors}}
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Estado de Salud</legend>
+            <div class="campo">
+                {{form_estado_salud.es_discapacitado}}
+                <label for="{{ form_estado_salud.es_discapacitado.id_for_label }}" >Es Discapacitado:</label>
+                {{form_estado_salud.es_discapacitado.errors}}
+            </div>
+            <div class="campo">
+                {{form_estado_salud.posee_obesidad}}
+                <label for="{{ form_estado_salud.posee_obesidad.id_for_label }}" >Posee Obesidad:</label>
+                {{form_estado_salud.posee_obesidad.errors}}
+            </div>
+            <div class="campo">
+                {{form_estado_salud.posee_desnutricion}}
+                <label for="{{ form_estado_salud.posee_desnutricion.id_for_label }}" >Posee Desnutricion:</label>
+                {{form_estado_salud.posee_desnutricion.errors}}
+            </div>
+            <div class="campo">
+                <label for="{{ form_estado_salud.observaciones.id_for_label }}">Observaciones:</label>
+                {{form_estado_salud.observaciones}}
+                {{form_estado_salud.observaciones.errors}}
+            </div>
+        </fieldset>
+
+      {% csrf_token %}
+      <input type="submit" value="Guardar">
+    </form>
+{% endblock %}

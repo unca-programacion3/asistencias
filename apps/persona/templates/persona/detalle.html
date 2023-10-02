@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% block titulo %}Detalle de Persona{% endblock %}
+{% block contenido %}
+  <h1>Persona: {{ persona.nombre_completo }}</h1>
+  {% if messages %}
+      {% for message in messages %}
+          {% if message.tags == 'success' %}  <div class="message">{{ message }}</div>{% endif %}
+      {% endfor %}
+  {% endif %}
+
+    <p><strong>DNI: </strong>{{ persona.dni }}</p>
+    <p><strong>Sexo: </strong>{{ persona.get_sexo_display }}</p>
+    <p><strong>Fecha de Nacimiento: </strong>{{ persona.fecha_nacimiento|date:"SHORT_DATE_FORMAT" }}</p>
+    <br><hr><br>
+    <h3>Datos de Salud</h3>
+    <p><strong>Es Discapacitado: </strong>{{ persona.estadosalud.es_discapacitado }}</p>
+{% endblock %}
