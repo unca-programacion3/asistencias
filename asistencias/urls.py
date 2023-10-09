@@ -19,7 +19,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='base/home.html'), name='home'),
+    #path('', TemplateView.as_view(template_name='base/home.html'), name='home'),
+    path('', include('apps.usuarios.urls', namespace='usuarios')),
     path('programa/', include('apps.programa.urls', namespace='programa')),
     path('persona/', include('apps.persona.urls', namespace='persona')),
 ]

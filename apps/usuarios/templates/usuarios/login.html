@@ -1,0 +1,13 @@
+{% extends "base/base.html" %}
+{% block titulo %}Inicio Sesión{% endblock %}
+{% block contenido %}
+    {% if msj %}
+        <div>{{ msj }}</div>
+    {% endif %}
+    <form action="{% url 'usuarios:login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}
